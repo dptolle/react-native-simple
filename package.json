@@ -35,5 +35,5 @@
   "resolutions": {
     "@types/react": "17.0.45"
   },
-  "private": true
+  "private": false
 }
