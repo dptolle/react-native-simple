@@ -1,15 +1,24 @@
-import React, { useState} from "react";
-import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator, Image, ScrollView} from 'react-native';
+import React, { useState, useEffect} from "react";
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
-export default function QuotePage(){
+export default function QuotePage({route}){
     const [name, nameChange] = useState('');
     const [email, emailChange] = useState('');
     const [phone, phoneChange] = useState('');
     const [message, messageChange] = useState('');
     const [submitError, setError] = useState(false);
     const [submitted, trySubmit] = useState(false);
+    const { model, modelNumber } = route.params;
 
+    useEffect(() => {
+      if(model !== 'Footer'){
+        const newQuote = `${model} model#: ${modelNumber}`;
+        messageChange(newQuote);
+      } else {
+          messageChange('')
+      }
+    })
 
     const postMessage = () => {
         if(!name|!email|!message) {
